@@ -34,13 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
     String genero="";
-    String []entidad = {"Hola","Pepe","Juan","Sam","Carlos","Daniela"};
-    /*String []entidad = {"AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","COAHUILA",
+    String []entidad = {"AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","COAHUILA",
             "COLIMA","CHIAPAS","CHIHUAHUA","DISTRITO FEDERAL","DURANGO","GUANAJUATO","GUERRERO","HIDALGO",
             "JALISCO","MÉXICO","MICHOACAN","MORELOS","NAYARIT","NUEVO LEON","OAXACA","PUEBLA","QUERETARO","QUINTANA ROO",
             "SAN LUIS POTOSI","SINALOA","SONORA","TABASCO","TAMAULIPAS","TLAXCALA","VERACRUZ","YUCATAN","ZACATECAS"};
     String []entidadValue = {"AS","BC","BS","CC","CL","CM","CS","CH","DF","DG","GT","GR","HG","JC","MC","MN","MS"
-            ,"NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"};*/
+            ,"NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"};
     int dia,mes,anio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtFech = (TextView) findViewById(R.id.fechanac);
 
         adapterItem = new ArrayAdapter<String>(this,R.layout.list_item_entidad,entidad);
+
+        btnFecha.setBackgroundResource(R.drawable.botones);
+        btnBuscar.setBackgroundResource(R.drawable.botones);
 
         //AutoCompleteTextView
         autoCompleteText = findViewById(R.id.auto_complete_txt);

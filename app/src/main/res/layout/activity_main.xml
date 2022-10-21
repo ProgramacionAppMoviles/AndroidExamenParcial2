@@ -124,7 +124,7 @@
                 android:layout_marginEnd="44dp"
                 android:background="#BE17651A"
 
-                android:hint="FECHA DE NACIMIENTO"
+                android:hint="dd/mm/yyyy"
                 android:inputType="text"
                 android:paddingTop="15dp"
                 android:textAlignment="center"
@@ -182,7 +182,7 @@
                 android:layout_width="138dp"
                 android:layout_height="69dp"
                 android:layout_marginTop="20dp"
-                android:text="Fecha Nacimiento"
+                android:text="Ingresar Fecha Nacimiento"
                 app:layout_constraintEnd_toStartOf="@+id/fechanac"
                 app:layout_constraintHorizontal_bias="0.64"
                 app:layout_constraintStart_toStartOf="parent"
