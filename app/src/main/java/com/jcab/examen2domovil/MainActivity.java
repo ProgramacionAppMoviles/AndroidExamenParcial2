@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         autoCompleteText = findViewById(R.id.auto_complete_txt);
         //Poner a escuchar al AutoCompleteTextView
         autoCompleteText.setAdapter(adapterItem);
-
         autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                         txtFech.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                        txtFech.setBackgroundResource(R.drawable.valido);
                     }
                 }
                 ,dia,mes,anio);
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+         switch(v.getId()){
             case R.id.radioButtonHombre:
                 if(rbtnF.isChecked()== true){
                     rbtnF.setChecked(false);
@@ -121,7 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mostrarCalendario();
                 break;
             case R.id.btnBuscar:
-                if(this.in1.getValido() && this.in2.getValido() && this.in3.getValido()){
+                //validaciones...
+                if(this.in1.getValido() && this.in2.getValido() && this.in3.getValido()
+                && !(this.txtFech.getText().toString().equals(""))
+                && (this.rbtnF.isChecked() || this.rbtnM.isChecked())
+                && !(this.autoCompleteText.getText().toString().equals(""))){
                     generarCurp();
                 }else{
                    AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.");
@@ -152,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     dialog.cancel();
                                 }
                             });*/
-
+        builder1.setIcon(R.drawable.warningicon);
         AlertDialog myalert = builder1.create();
 
         return myalert;
