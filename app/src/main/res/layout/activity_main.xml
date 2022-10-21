@@ -3,200 +3,222 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contenedor"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="#BFBDBD"
     android:backgroundTint="#BFBDBD"
     android:elevation="15dp"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="107dp"
-        android:background="#155A18"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="-5dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="117dp"
-            android:elevation="15dp"
-            android:translationZ="20dp">
+            android:layout_height="wrap_content"
+              >
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="138dp"
-                android:layout_height="77dp"
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="410dp"
+                android:layout_height="107dp"
+                android:background="#155A18"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="-5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="117dp"
+                    android:elevation="15dp"
+                    android:translationZ="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="138dp"
+                        android:layout_height="77dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.974"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.4"
+                        app:srcCompat="@drawable/escudo1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Ingrese sus datos:"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <EditText
+                android:id="@+id/apepat"
+                android:layout_width="330dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+
+                android:hint="PRIMER APELLIDO"
+                android:inputType="textPersonName"
+                android:paddingTop="15dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                android:background="#BE17651A"
+                />
+
+            <EditText
+                android:id="@+id/apemat"
+                android:layout_width="330dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:hint="SEGUNDO APELLIDO"
+                android:inputType="text"
+                android:paddingTop="15dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/apepat"
+                android:background="#BE17651A"
+
+
+                />
+
+
+            <EditText
+                android:id="@+id/nombres"
+                android:layout_width="330dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="24dp"
+                android:hint="NOMBRE(S)"
+                android:inputType="textPersonName"
+                android:paddingTop="15dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/apemat"
+                android:background="#BE17651A"
+
+                />
+
+            <TextView
+                android:id="@+id/fechanac"
+                android:layout_width="169dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="44dp"
+                android:background="#BE17651A"
+                android:backgroundTint="#BE17651A"
+                android:hint="FECHA DE NACIMIENTO"
+                android:inputType="text"
+                android:paddingTop="15dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nombres" />
+
+            <RadioButton
+                android:id="@+id/radioButtonMujer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="32dp"
+                android:text="MUJER"
+                app:layout_constraintEnd_toStartOf="@+id/radioButtonHombre"
+                app:layout_constraintTop_toBottomOf="@+id/fechanac" />
+
+            <RadioButton
+                android:id="@+id/radioButtonHombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="52dp"
+                android:text="HOMBRE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fechanac" />
+
+            <TextView
+                android:id="@+id/genero"
+                android:layout_width="100dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="28dp"
+                android:background="#BE17651A"
+                android:backgroundTint="#BE17651A"
+                android:paddingTop="15dp"
+                android:text="SEXO"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@+id/radioButtonMujer"
+                app:layout_constraintHorizontal_bias="0.602"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fechanac" />
+
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="322dp"
+                android:layout_height="46dp"
+                android:layout_marginBottom="44dp"
+                android:text="BUSCAR"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.974"
+                app:layout_constraintHorizontal_bias="0.539"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btnFecha"
+                android:layout_width="138dp"
+                android:layout_height="69dp"
+                android:layout_marginTop="20dp"
+                android:text="Fecha Nacimiento"
+                app:layout_constraintEnd_toStartOf="@+id/fechanac"
+                app:layout_constraintHorizontal_bias="0.64"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4"
-                app:srcCompat="@drawable/escudo1" />
+                app:layout_constraintTop_toBottomOf="@+id/nombres" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="392dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButtonMujer">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="@string/select"
+                    tools:layout_editor_absoluteX="1dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/auto_complete_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Ingrese sus datos:"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <EditText
-        android:id="@+id/apepat"
-        android:layout_width="330dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="20dp"
-        android:background="#BE17651A"
-        android:backgroundTint="#BE17651A"
-        android:hint="PRIMER APELLIDO"
-        android:inputType="textPersonName"
-        android:paddingTop="15dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <EditText
-        android:id="@+id/apemat"
-        android:layout_width="330dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="20dp"
-        android:background="#BE17651A"
-        android:backgroundTint="#BE17651A"
-        android:hint="SEGUNDO APELLIDO"
-        android:inputType="textPersonName"
-        android:paddingTop="15dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apepat" />
-
-
-    <EditText
-        android:id="@+id/nombres"
-        android:layout_width="330dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="24dp"
-        android:background="#BE17651A"
-        android:backgroundTint="#BE17651A"
-        android:hint="NOMBRE(S)"
-        android:inputType="textPersonName"
-        android:paddingTop="15dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apemat" />
-
-    <TextView
-        android:id="@+id/fechanac"
-        android:layout_width="169dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="44dp"
-        android:background="#BE17651A"
-        android:backgroundTint="#BE17651A"
-        android:hint="FECHA DE NACIMIENTO"
-        android:inputType="text"
-        android:paddingTop="15dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombres" />
-
-    <RadioButton
-        android:id="@+id/radioButtonMujer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="32dp"
-        android:text="MUJER"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonHombre"
-        app:layout_constraintTop_toBottomOf="@+id/fechanac" />
-
-    <RadioButton
-        android:id="@+id/radioButtonHombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="52dp"
-        android:text="HOMBRE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechanac" />
-
-    <TextView
-        android:id="@+id/genero"
-        android:layout_width="100dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="28dp"
-        android:background="#BE17651A"
-        android:backgroundTint="#BE17651A"
-        android:paddingTop="15dp"
-        android:text="SEXO"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonMujer"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechanac" />
-
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="322dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="44dp"
-        android:text="BUSCAR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnFecha"
-        android:layout_width="138dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="20dp"
-        android:text="Fecha Nacimiento"
-        app:layout_constraintEnd_toStartOf="@+id/fechanac"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombres" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="392dp"
-        android:layout_height="68dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButtonMujer">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="@string/select"
-            tools:layout_editor_absoluteX="1dp">
-
-            <AutoCompleteTextView
-                android:id="@+id/auto_complete_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
