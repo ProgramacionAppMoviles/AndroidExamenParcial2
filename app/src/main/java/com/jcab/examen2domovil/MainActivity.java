@@ -31,7 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
     String genero="";
-    String []entidad = {"Hola","Juan","Cris","Pamela","Carlos"};
+    String []entidad = {"Hola","Pepe","Juan","Sam","Carlos","Daniela"};
+    /*String []entidad = {"AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","COAHUILA",
+            "COLIMA","CHIAPAS","CHIHUAHUA","DISTRITO FEDERAL","DURANGO","GUANAJUATO","GUERRERO","HIDALGO",
+            "JALISCO","MÉXICO","MICHOACAN","MORELOS","NAYARIT","NUEVO LEON","OAXACA","PUEBLA","QUERETARO","QUINTANA ROO",
+            "SAN LUIS POTOSI","SINALOA","SONORA","TABASCO","TAMAULIPAS","TLAXCALA","VERACRUZ","YUCATAN","ZACATECAS"};
+    String []entidadValue = {"AS","BC","BS","CC","CL","CM","CS","CH","DF","DG","GT","GR","HG","JC","MC","MN","MS"
+            ,"NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"};*/
     int dia,mes,anio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
