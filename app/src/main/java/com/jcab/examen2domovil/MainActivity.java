@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("id",""+this.id);
             EditText text = (EditText)  findViewById(id);
             String myText = text.getText().toString().trim();
-            if(myText.matches("[a-zA-Z]+")) {
+            if(myText.matches("[a-zA-Z\\ ]+")) {
                 text.setBackgroundResource(R.drawable.valido);
                 this.valido=true;
             }else{
