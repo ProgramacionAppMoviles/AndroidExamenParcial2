@@ -1,9 +1,11 @@
 package com.jcab.examen2domovil;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +27,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener {
     Button btnBuscar, btnFecha;
+    KeyEvents in1,in2,in3;
     RadioButton rbtnM, rbtnF;
     EditText eApePat,eApeMat,eNom;
     TextView txtFech;
@@ -57,10 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eApePat = (EditText) findViewById(R.id.apepat);
         eNom = (EditText) findViewById(R.id.nombres);
         //Ponerlos a escuchar
-        eApeMat.addTextChangedListener(new KeyEvents(R.id.apemat));
-        Log.i("R",""+R.id.apemat);
-        eApePat.addTextChangedListener(new KeyEvents(R.id.apepat));
-        eNom.addTextChangedListener(new KeyEvents(R.id.nombres));
+        this.in1 = new KeyEvents(R.id.apemat);
+        this.in2 = new KeyEvents(R.id.apepat);
+        this.in3 = new KeyEvents(R.id.nombres);
+        eApeMat.addTextChangedListener(this.in1);
+        eApePat.addTextChangedListener(this.in2);
+        eNom.addTextChangedListener(this.in3);
         //TextView
         txtFech = (TextView) findViewById(R.id.fechanac);
 
@@ -115,9 +120,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnFecha:
                 mostrarCalendario();
                 break;
+            case R.id.btnBuscar:
+                if(this.in1.getValido() && this.in2.getValido() && this.in3.getValido()){
+                    generarCurp();
+                }else{
+                   AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.");
+                    myalert.show();
+                }
+                break;
         }
     }
 
+    public AlertDialog generarAlerta(String title,String msg){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle(title);
+        builder1.setMessage(msg);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                    /*builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });*/
+
+        AlertDialog myalert = builder1.create();
+
+        return myalert;
+    }
+    public void generarCurp(){
+
+    }
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction()==KeyEvent.ACTION_DOWN){
@@ -132,9 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     class KeyEvents implements TextWatcher{
         private int id;
-
+        private boolean valido;
         KeyEvents(int id){
             this.id=id;
+            this.valido=false;
         }
 
         @Override
@@ -150,15 +193,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String myText = text.getText().toString().trim();
             if(myText.matches("[a-zA-Z]+")) {
                 text.setBackgroundResource(R.drawable.valido);
+                this.valido=true;
             }else{
                 text.setBackgroundResource(R.drawable.error);
-
+                this.valido=false;
             }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
 
+        }
+        public boolean getValido(){
+            return this.valido;
         }
     }
 
