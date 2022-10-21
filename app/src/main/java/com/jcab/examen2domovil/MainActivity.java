@@ -1,9 +1,11 @@
 package com.jcab.examen2domovil;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +27,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener {
     Button btnBuscar, btnFecha;
+    KeyEvents in1,in2,in3;
     RadioButton rbtnM, rbtnF;
     EditText eApePat,eApeMat,eNom;
     TextView txtFech;
@@ -63,10 +66,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eApePat = (EditText) findViewById(R.id.apepat);
         eNom = (EditText) findViewById(R.id.nombres);
         //Ponerlos a escuchar
-        eApeMat.addTextChangedListener(new KeyEvents(R.id.apemat));
-        Log.i("R",""+R.id.apemat);
-        eApePat.addTextChangedListener(new KeyEvents(R.id.apepat));
-        eNom.addTextChangedListener(new KeyEvents(R.id.nombres));
+        this.in1 = new KeyEvents(R.id.apemat);
+        this.in2 = new KeyEvents(R.id.apepat);
+        this.in3 = new KeyEvents(R.id.nombres);
+        eApeMat.addTextChangedListener(this.in1);
+        eApePat.addTextChangedListener(this.in2);
+        eNom.addTextChangedListener(this.in3);
         //TextView
         txtFech = (TextView) findViewById(R.id.fechanac);
 
@@ -76,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         autoCompleteText = findViewById(R.id.auto_complete_txt);
         //Poner a escuchar al AutoCompleteTextView
         autoCompleteText.setAdapter(adapterItem);
-
         autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                         txtFech.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                        txtFech.setBackgroundResource(R.drawable.valido);
                     }
                 }
                 ,dia,mes,anio);
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+         switch(v.getId()){
             case R.id.radioButtonHombre:
                 if(rbtnF.isChecked()== true){
                     rbtnF.setChecked(false);
@@ -121,9 +126,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnFecha:
                 mostrarCalendario();
                 break;
+            case R.id.btnBuscar:
+                //validaciones...
+                if(this.in1.getValido() && this.in2.getValido() && this.in3.getValido()
+                && !(this.txtFech.getText().toString().equals(""))
+                && (this.rbtnF.isChecked() || this.rbtnM.isChecked())
+                && !(this.autoCompleteText.getText().toString().equals(""))){
+                    generarCurp();
+                }else{
+                   AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.");
+                    myalert.show();
+                }
+                break;
         }
     }
 
+    public AlertDialog generarAlerta(String title,String msg){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle(title);
+        builder1.setMessage(msg);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                    /*builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });*/
+        builder1.setIcon(R.drawable.warningicon);
+        AlertDialog myalert = builder1.create();
+
+        return myalert;
+    }
+    public void generarCurp(){
+
+    }
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction()==KeyEvent.ACTION_DOWN){
@@ -138,9 +184,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     class KeyEvents implements TextWatcher{
         private int id;
-
+        private boolean valido;
         KeyEvents(int id){
             this.id=id;
+            this.valido=false;
         }
 
         @Override
@@ -154,17 +201,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("id",""+this.id);
             EditText text = (EditText)  findViewById(id);
             String myText = text.getText().toString().trim();
-            if(myText.matches("[a-zA-Z]+")) {
+            if(myText.matches("[a-zA-Z\\ ]+")) {
                 text.setBackgroundResource(R.drawable.valido);
+                this.valido=true;
             }else{
                 text.setBackgroundResource(R.drawable.error);
-
+                this.valido=false;
             }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
 
+        }
+        public boolean getValido(){
+            return this.valido;
         }
     }
 

@@ -123,7 +123,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="44dp"
                 android:background="#BE17651A"
-                android:backgroundTint="#BE17651A"
+
                 android:hint="FECHA DE NACIMIENTO"
                 android:inputType="text"
                 android:paddingTop="15dp"
