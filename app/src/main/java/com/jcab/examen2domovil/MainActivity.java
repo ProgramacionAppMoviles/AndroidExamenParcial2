@@ -186,15 +186,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void generarCurp()  {
+        int numero;
         String nombres,apellido1,apellido2;
         boolean band = true;
+        //obtenemos nombres y apellidos...
         nombres = this.eNom.getText().toString().trim();
         apellido1 = this.eApePat.getText().toString().trim();
         apellido2 = this.eApeMat.getText().toString().trim();
         String curp = "";
-        int i = 1;
+        int i = 0;
+        //concatena la primer letra del apellido paterno
         curp+=apellido1.charAt(0);
-        while(band && apellido1.length()>1){
+        //encuentra la primera vocal del primer apellido
+        while(band && apellido1.length()>0){
             Character letra = apellido1.charAt(i);
             if("aeiou".contains(String.valueOf(letra).toLowerCase())){
                 curp+=apellido1.charAt(i);
@@ -202,29 +206,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
                   i++;
         }
+        //concatena inicial del segundo apellido
         curp+=apellido2.charAt(0);
+        //concatena inicial del primer nombre
         curp+=nombres.charAt(0);
         Date fecha;
         try {
+            //convertimos fecha string a calendar
             fecha = formato.parse(txtFech.getText().toString());
             GregorianCalendar calendario = new GregorianCalendar();
             calendario.setTime(fecha);
             Log.i("fecha",""+calendario.get(Calendar.YEAR));
             int year = calendario.get(Calendar.YEAR);
             i=0;
+            //desvarata el año para tomar los ultimos 2 digitos y los concatena a la curp
             while(i<2){
                 int coc = year%10;
                 year/=10;
                 curp+=coc;
                 i++;
             }
+            //concatenar mes y dia
             curp+=calendario.get(Calendar.MONTH)+1;
             curp+=calendario.get(Calendar.DAY_OF_MONTH);
+            //concatena el genero
+            if(rbtnM.isChecked()){
+                curp+="h";
+            }else{
+                curp+="m";
+            }
+            //concatena las siglas de la entidad federativa
+            curp+=this.entidad.get(this.autoCompleteText.getText().toString());
+
+            //encontrar primera consonante interna del primer apellido, del segundo
+            //y del nombre(s)
+           curp+=consonanteInt(apellido1);
+           curp+=consonanteInt(apellido2);
+           curp+=consonanteInt(nombres);
+           numero = (int)(Math.random()*90+65);
+           curp+=(char)numero;
+           numero = (int)(Math.random()*10+0);
+           curp+=numero;
+
         }catch(Exception e){
 
         }
-        Log.i("curp",""+curp);
+        Log.i("curp",""+curp.toUpperCase());
+        curp = curp.toUpperCase();
+        AlertDialog myalert = generarAlerta("Curp",curp);
+        myalert.show();
     }
+
+    public Character consonanteInt(String a){
+        int i=1;
+        while(true){
+            Character letra = a.charAt(i);
+            if(!("aeiou".contains(String.valueOf(letra).toLowerCase()))){
+                return a.charAt(i);
+
+            }
+            i++;
+        }
+    }
+
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction()==KeyEvent.ACTION_DOWN){
