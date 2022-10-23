@@ -247,7 +247,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            curp+=consonanteInt(apellido1);
            curp+=consonanteInt(apellido2);
            curp+=consonanteInt(nombres);
-           numero = (int)(Math.random()*90+65);
+           numero = (int)(Math.random()*(90-65+1)+65);
+           Log.i("aleatorio",""+numero);
            curp+=(char)numero;
            numero = (int)(Math.random()*10+0);
            curp+=numero;
