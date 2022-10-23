@@ -11,13 +11,15 @@
     tools:context=".MainActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="413dp"
+        android:layout_height="731dp"
+        android:background="@drawable/degradado"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-              >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
 
             <LinearLayout
@@ -32,41 +34,52 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="117dp"
-                    android:elevation="15dp"
-                    android:translationZ="20dp">
+                    android:layout_height="71dp"
+                    android:background="#043205"
+                    android:elevation="75dp"
+                    android:translationZ="350dp">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="117dp"
+                        android:layout_height="49dp"
+                        android:layout_marginEnd="112dp"
+                        android:layout_marginBottom="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/fav"
+                        app:srcCompat="@drawable/mexico2_removebg_preview" />
+
                     <ImageView
                         android:id="@+id/info"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="37dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.05"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.1"
+                        app:layout_constraintVertical_bias="0.444"
                         app:srcCompat="@drawable/ic_stat_name" />
+
                     <ImageView
                         android:id="@+id/fav"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="37dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.8"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/info"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.1"
+                        app:layout_constraintVertical_bias="0.444"
                         app:srcCompat="@drawable/fav" />
+
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="56dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.974"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.1"
                         app:srcCompat="@drawable/escudo1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,9 +90,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Ingrese sus datos:"
+                android:fontFamily="sans-serif-black"
+                android:text="INGRESE SUS DATOS"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -89,35 +103,38 @@
             <EditText
                 android:id="@+id/apepat"
                 android:layout_width="330dp"
-                android:layout_height="54dp"
+                android:layout_height="51dp"
                 android:layout_marginTop="20dp"
 
+                android:background="#9517651A"
+                android:elevation="2dp"
+                android:fontFamily="sans-serif-black"
                 android:hint="PRIMER APELLIDO"
                 android:inputType="textPersonName"
-                android:paddingTop="15dp"
+                android:paddingTop="3dp"
                 android:textAlignment="center"
+                android:translationZ="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                android:background="#BE17651A"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <EditText
                 android:id="@+id/apemat"
                 android:layout_width="330dp"
                 android:layout_height="54dp"
                 android:layout_marginTop="20dp"
+                android:background="#BE17651A"
+                android:fontFamily="sans-serif-black"
                 android:hint="SEGUNDO APELLIDO"
                 android:inputType="text"
-                android:paddingTop="15dp"
+                android:paddingTop="3dp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/apepat"
-                android:background="#BE17651A"
 
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/apepat" />
 
 
             <EditText
@@ -125,29 +142,30 @@
                 android:layout_width="330dp"
                 android:layout_height="54dp"
                 android:layout_marginTop="24dp"
+                android:background="#BE17651A"
+                android:fontFamily="sans-serif-black"
                 android:hint="NOMBRE(S)"
                 android:inputType="textPersonName"
-                android:paddingTop="15dp"
+                android:paddingTop="3dp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/apemat"
-                android:background="#BE17651A"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/apemat" />
 
             <TextView
                 android:id="@+id/fechanac"
                 android:layout_width="169dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="44dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="52dp"
                 android:background="#BE17651A"
 
+                android:fontFamily="sans-serif-black"
                 android:hint="dd/mm/yyyy"
                 android:inputType="text"
-                android:paddingTop="15dp"
+                android:paddingTop="18dp"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nombres" />
@@ -158,7 +176,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="32dp"
+                android:fontFamily="sans-serif-black"
                 android:text="MUJER"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toStartOf="@+id/radioButtonHombre"
                 app:layout_constraintTop_toBottomOf="@+id/fechanac" />
 
@@ -168,7 +188,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="52dp"
+                android:fontFamily="sans-serif-black"
                 android:text="HOMBRE"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fechanac" />
 
@@ -179,11 +201,12 @@
                 android:layout_marginTop="28dp"
                 android:background="#BE17651A"
                 android:backgroundTint="#BE17651A"
-                android:paddingTop="15dp"
+                android:fontFamily="sans-serif-black"
+                android:paddingTop="18dp"
                 android:text="SEXO"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@+id/radioButtonMujer"
-                app:layout_constraintHorizontal_bias="0.602"
+                app:layout_constraintHorizontal_bias="0.816"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fechanac" />
 
@@ -191,27 +214,31 @@
                 android:id="@+id/btnBuscar"
                 android:layout_width="322dp"
                 android:layout_height="46dp"
-                android:layout_marginBottom="44dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-black"
                 android:text="BUSCAR"
+                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.539"
+                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btnFecha"
-                android:layout_width="138dp"
-                android:layout_height="69dp"
+                android:layout_width="141dp"
+                android:layout_height="76dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
                 android:text="Ingresar Fecha Nacimiento"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toStartOf="@+id/fechanac"
-                app:layout_constraintHorizontal_bias="0.64"
+                app:layout_constraintHorizontal_bias="0.745"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nombres" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="392dp"
-                android:layout_height="68dp"
+                android:layout_width="360dp"
+                android:layout_height="67dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
@@ -231,10 +258,10 @@
                         android:id="@+id/auto_complete_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

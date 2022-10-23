@@ -3,6 +3,7 @@ package com.jcab.examen2domovil;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -34,7 +35,7 @@ import java.util.Map;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener  {
     Button btnBuscar, btnFecha;
     ImageView info,fav;
     KeyEvents in1,in2,in3;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
     String genero="";
+
 
     int dia,mes,anio;
 
@@ -115,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(),"Item: "+item,Toast.LENGTH_SHORT).show();
             }
         });
+        eApeMat.setBackgroundResource(R.drawable.disenobot);
+        eApePat.setBackgroundResource(R.drawable.disenobot);
+        eNom.setBackgroundResource(R.drawable.disenobot);
     }
 
     public void mostrarCalendario(){
@@ -170,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  AlertDialog myalert = generarAlerta("Información",
                          "Para obtener tu curp ingresa los datos que" +
                                  "se solicitan, en caso de ser incorrectos" +
-                                 "el entorno te lo dara a conocer." +
+                                 " el entorno te lo dara a conocer." +
                                  "Una vez ingresados los datos haz clic en buscar.",
                          R.drawable.info_icon);
                  myalert.show();
@@ -187,6 +192,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  }
                  break;
         }
+        eApeMat.setBackgroundResource(R.drawable.disenobot);
+        eApePat.setBackgroundResource(R.drawable.disenobot);
+        eNom.setBackgroundResource(R.drawable.disenobot);
     }
 
     public AlertDialog generarAlerta(String title, String msg, int icon){
