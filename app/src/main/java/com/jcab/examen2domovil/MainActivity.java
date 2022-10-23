@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import java.util.Map;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener {
     Button btnBuscar, btnFecha;
+    ImageView info,fav;
     KeyEvents in1,in2,in3;
     RadioButton rbtnM, rbtnF;
     EditText eApePat,eApeMat,eNom;
@@ -67,10 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Button
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnFecha = (Button) findViewById(R.id.btnFecha);
+        info = (ImageView) findViewById(R.id.info);
+        fav = (ImageView) findViewById(R.id.fav);
+        fav.setTag(R.drawable.fav);
         //Poner a los botones que escuchen
         btnFecha.setOnClickListener(this);
         btnBuscar.setOnClickListener(this);
-
+        info.setOnClickListener(this);
+        fav.setOnClickListener(this);
         //RadioButton
         rbtnF = (RadioButton) findViewById(R.id.radioButtonMujer);
         rbtnM = (RadioButton) findViewById(R.id.radioButtonHombre);
@@ -155,14 +162,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && !(this.autoCompleteText.getText().toString().equals(""))){
                     generarCurp();
                 }else{
-                   AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.");
+                   AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.",R.drawable.warningicon);
                     myalert.show();
                 }
                 break;
+             case R.id.info:
+                 AlertDialog myalert = generarAlerta("Información",
+                         "Para obtener tu curp ingresa los datos que" +
+                                 "se solicitan, en caso de ser incorrectos" +
+                                 "el entorno te lo dara a conocer." +
+                                 "Una vez ingresados los datos haz clic en buscar.",
+                         R.drawable.info_icon);
+                 myalert.show();
+                 break;
+             case R.id.fav:
+                 if((int)fav.getTag()==R.drawable.fav){
+                     fav.setImageResource(R.drawable.fav_active);
+                     fav.setTag(R.drawable.fav_active);
+
+                 }else{
+                     fav.setImageResource(R.drawable.fav);
+                     fav.setTag(R.drawable.fav);
+
+                 }
+                 break;
         }
     }
 
-    public AlertDialog generarAlerta(String title,String msg){
+    public AlertDialog generarAlerta(String title, String msg, int icon){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setTitle(title);
         builder1.setMessage(msg);
@@ -183,7 +210,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     dialog.cancel();
                                 }
                             });*/
-        builder1.setIcon(R.drawable.warningicon);
+
+        builder1.setIcon(icon);
         AlertDialog myalert = builder1.create();
 
         return myalert;
@@ -264,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Log.i("curp",""+curp.toUpperCase());
         curp = curp.toUpperCase();
-        AlertDialog myalert = generarAlerta("Curp",curp);
+        AlertDialog myalert = generarAlerta("Curp",curp,R.drawable.warningicon);
         myalert.show();
     }
 
