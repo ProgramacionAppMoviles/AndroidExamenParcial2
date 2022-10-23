@@ -1,11 +1,14 @@
 package com.jcab.examen2domovil;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.GregorianCalendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,8 +26,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnKeyListener {
     Button btnBuscar, btnFecha;
     KeyEvents in1,in2,in3;
@@ -34,17 +41,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
     String genero="";
-    String []entidad = {"AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","COAHUILA",
+
+    int dia,mes,anio;
+
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+    String []arrayentidad = {"AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","COAHUILA",
             "COLIMA","CHIAPAS","CHIHUAHUA","DISTRITO FEDERAL","DURANGO","GUANAJUATO","GUERRERO","HIDALGO",
             "JALISCO","MÉXICO","MICHOACAN","MORELOS","NAYARIT","NUEVO LEON","OAXACA","PUEBLA","QUERETARO","QUINTANA ROO",
             "SAN LUIS POTOSI","SINALOA","SONORA","TABASCO","TAMAULIPAS","TLAXCALA","VERACRUZ","YUCATAN","ZACATECAS"};
     String []entidadValue = {"AS","BC","BS","CC","CL","CM","CS","CH","DF","DG","GT","GR","HG","JC","MC","MN","MS"
             ,"NT","NL","OC","PL","QT","QR","SP","SL","SR","TC","TS","TL","VZ","YN","ZS"};
-    int dia,mes,anio;
+    Map<String,String> entidad = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //llenar
+        for(int i = 0; i<this.arrayentidad.length;i++){
+            entidad.put(arrayentidad[i],entidadValue[i]);
+        }
+
 
         //Button
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
@@ -74,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TextView
         txtFech = (TextView) findViewById(R.id.fechanac);
 
-        adapterItem = new ArrayAdapter<String>(this,R.layout.list_item_entidad,entidad);
+        adapterItem = new ArrayAdapter<String>(this,R.layout.list_item_entidad, arrayentidad);
 
         btnFecha.setBackgroundResource(R.drawable.botones);
         btnBuscar.setBackgroundResource(R.drawable.botones);
@@ -110,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datePickerDialog.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
          switch(v.getId()){
@@ -169,9 +188,91 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return myalert;
     }
-    public void generarCurp(){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void generarCurp()  {
+        int numero;
+        String nombres,apellido1,apellido2;
+        boolean band = true;
+        //obtenemos nombres y apellidos...
+        nombres = this.eNom.getText().toString().trim();
+        apellido1 = this.eApePat.getText().toString().trim();
+        apellido2 = this.eApeMat.getText().toString().trim();
+        String curp = "";
+        int i = 0;
+        //concatena la primer letra del apellido paterno
+        curp+=apellido1.charAt(0);
+        //encuentra la primera vocal del primer apellido
+        while(band && apellido1.length()>0){
+            Character letra = apellido1.charAt(i);
+            if("aeiou".contains(String.valueOf(letra).toLowerCase())){
+                curp+=apellido1.charAt(i);
+                band = false;
+            }
+                  i++;
+        }
+        //concatena inicial del segundo apellido
+        curp+=apellido2.charAt(0);
+        //concatena inicial del primer nombre
+        curp+=nombres.charAt(0);
+        Date fecha;
+        try {
+            //convertimos fecha string a calendar
+            fecha = formato.parse(txtFech.getText().toString());
+            GregorianCalendar calendario = new GregorianCalendar();
+            calendario.setTime(fecha);
+            Log.i("fecha",""+calendario.get(Calendar.YEAR));
+            int year = calendario.get(Calendar.YEAR);
+            i=0;
+            //desvarata el año para tomar los ultimos 2 digitos y los concatena a la curp
+            while(i<2){
+                int coc = year%10;
+                year/=10;
+                curp+=coc;
+                i++;
+            }
+            //concatenar mes y dia
+            curp+=calendario.get(Calendar.MONTH)+1;
+            curp+=calendario.get(Calendar.DAY_OF_MONTH);
+            //concatena el genero
+            if(rbtnM.isChecked()){
+                curp+="h";
+            }else{
+                curp+="m";
+            }
+            //concatena las siglas de la entidad federativa
+            curp+=this.entidad.get(this.autoCompleteText.getText().toString());
 
+            //encontrar primera consonante interna del primer apellido, del segundo
+            //y del nombre(s)
+           curp+=consonanteInt(apellido1);
+           curp+=consonanteInt(apellido2);
+           curp+=consonanteInt(nombres);
+           numero = (int)(Math.random()*90+65);
+           curp+=(char)numero;
+           numero = (int)(Math.random()*10+0);
+           curp+=numero;
+
+        }catch(Exception e){
+
+        }
+        Log.i("curp",""+curp.toUpperCase());
+        curp = curp.toUpperCase();
+        AlertDialog myalert = generarAlerta("Curp",curp);
+        myalert.show();
     }
+
+    public Character consonanteInt(String a){
+        int i=1;
+        while(true){
+            Character letra = a.charAt(i);
+            if(!("aeiou".contains(String.valueOf(letra).toLowerCase()))){
+                return a.charAt(i);
+
+            }
+            i++;
+        }
+    }
+
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction()==KeyEvent.ACTION_DOWN){
