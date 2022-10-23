@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apellido1 = this.eApePat.getText().toString().trim();
         apellido2 = this.eApeMat.getText().toString().trim();
         String curp = "";
-        int i = 0;
+        int i = 1;
         //concatena la primer letra del apellido paterno
         curp+=apellido1.charAt(0);
         //encuentra la primera vocal del primer apellido
@@ -231,7 +231,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i++;
             }
             //concatenar mes y dia
+            if((calendario.get(Calendar.MONTH) + 1) < 10){
+                curp += "0";
+            }
             curp+=calendario.get(Calendar.MONTH)+1;
+            if((calendario.get(Calendar.DAY_OF_MONTH)) < 10){
+                curp += "0";
+            }
             curp+=calendario.get(Calendar.DAY_OF_MONTH);
             //concatena el genero
             if(rbtnM.isChecked()){
