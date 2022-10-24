@@ -225,7 +225,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nombres = this.eNom.getText().toString().trim();
         apellido1 = this.eApePat.getText().toString().trim();
         apellido2 = this.eApeMat.getText().toString().trim();
-        String curp = "";
+        String curp = "",aux = "";
+
         int i = 1;
         //concatena la primer letra del apellido paterno
         curp+=apellido1.charAt(0);
@@ -251,13 +252,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("fecha",""+calendario.get(Calendar.YEAR));
             int year = calendario.get(Calendar.YEAR);
             i=0;
+
             //desvarata el año para tomar los ultimos 2 digitos y los concatena a la curp
             while(i<2){
                 int coc = year%10;
                 year/=10;
-                curp+=coc;
+                aux+=coc;
                 i++;
             }
+
+            curp += aux.charAt(1);
+            curp += aux.charAt(0);
+
             //concatenar mes y dia
             if((calendario.get(Calendar.MONTH) + 1) < 10){
                 curp += "0";
