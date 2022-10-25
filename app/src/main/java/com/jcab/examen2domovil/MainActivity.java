@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),"Item: "+item,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Entidad: "+item+" seleccionada",Toast.LENGTH_SHORT).show();
             }
         });
         eApeMat.setBackgroundResource(R.drawable.disenobot);
@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              case R.id.info:
                  AlertDialog myalert = generarAlerta("Información",
                          "Para obtener tu curp ingresa los datos que" +
-                                 "se solicitan, en caso de ser incorrectos" +
+                                 " se solicitan, en caso de ser incorrectos" +
                                  " el entorno te lo dara a conocer." +
-                                 "Una vez ingresados los datos haz clic en buscar.",
+                                 "\nUna vez ingresados los datos haz clic en buscar.",
                          R.drawable.info_icon);
                  myalert.show();
                  break;
@@ -184,11 +184,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  if((int)fav.getTag()==R.drawable.fav){
                      fav.setImageResource(R.drawable.fav_active);
                      fav.setTag(R.drawable.fav_active);
-
+                     Toast.makeText(getApplicationContext(),"Le diste me encanta a la aplicación movil ;)",Toast.LENGTH_SHORT).show();
                  }else{
                      fav.setImageResource(R.drawable.fav);
                      fav.setTag(R.drawable.fav);
-
+                     Toast.makeText(getApplicationContext(),"Te dejo de gustar nuestra aplicación movil :´(",Toast.LENGTH_SHORT).show();
                  }
                  break;
         }
