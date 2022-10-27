@@ -56,7 +56,7 @@ public class mostrar_curp extends AppCompatActivity implements View.OnClickListe
                                 "anteriormente, para consultar otra" +
                                 " curp regresa con el icono flecha." +
                                 "\n\nPuedes ingresar otros datos para consultar "+
-                                "otra curp",
+                                "otra curp.",
                         R.drawable.info_icon);
                 myalert.show();
                 break;

@@ -175,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  AlertDialog myalert = generarAlerta("Información",
                          "Para obtener tu curp ingresa los datos que" +
                                  " se solicitan, en caso de ser incorrectos" +
-                                 " el entorno te lo dara a conocer." +
-                                 "\nUna vez ingresados los datos haz clic en buscar.",
+                                 " el entorno te lo dará a conocer." +
+                                 "\n\nUna vez ingresados los datos haz clic en buscar.",
                          R.drawable.info_icon);
                  myalert.show();
                  break;
