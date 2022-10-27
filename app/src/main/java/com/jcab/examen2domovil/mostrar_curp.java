@@ -23,6 +23,7 @@ public class mostrar_curp extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_mostrar_curp);
 
         tshowCurp = (TextView) findViewById(R.id.textCurp);
+        tshowCurp.setBackgroundResource(R.drawable.show_curp);
 
         back = (ImageView) findViewById(R.id.back);
         info = (ImageView) findViewById(R.id.info);
