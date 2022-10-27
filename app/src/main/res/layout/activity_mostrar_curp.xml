@@ -11,6 +11,7 @@
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@drawable/degradado"
@@ -47,7 +48,7 @@
                         android:layout_marginEnd="112dp"
                         android:layout_marginBottom="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/fav"
+                        app:layout_constraintEnd_toStartOf="@+id/back"
                         app:srcCompat="@drawable/mexico2_removebg_preview" />
 
                     <ImageView
@@ -62,7 +63,7 @@
                         app:srcCompat="@drawable/ic_stat_name" />
 
                     <ImageView
-                        android:id="@+id/fav"
+                        android:id="@+id/back"
                         android:layout_width="37dp"
                         android:layout_height="35dp"
                         android:layout_marginEnd="20dp"
@@ -70,7 +71,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/info"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.444"
-                        app:srcCompat="@drawable/fav" />
+                        app:srcCompat="@drawable/back" />
 
                     <ImageView
                         android:id="@+id/imageView2"
@@ -92,12 +93,15 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="118dp"
-        android:layout_height="36dp"
-        android:text="Hola"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="261dp" />
+        android:id="@+id/textCurp"
+        android:layout_width="398dp"
+        android:layout_height="122dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

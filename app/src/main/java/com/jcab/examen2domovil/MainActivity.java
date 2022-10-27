@@ -3,11 +3,9 @@ package com.jcab.examen2domovil;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
@@ -24,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.content.Intent;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView txtFech;
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
-    String genero="";
-
+    String genero="",scurp="";
+    public static final String CURP="mostar_CURP";
 
     int dia,mes,anio;
 
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnFecha = (Button) findViewById(R.id.btnFecha);
         info = (ImageView) findViewById(R.id.info);
-        fav = (ImageView) findViewById(R.id.fav);
+        fav = (ImageView) findViewById(R.id.back);
         fav.setTag(R.drawable.fav);
         //Poner a los botones que escuchen
         btnFecha.setOnClickListener(this);
@@ -166,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && (this.rbtnF.isChecked() || this.rbtnM.isChecked())
                 && !(this.autoCompleteText.getText().toString().equals(""))){
                     generarCurp();
+                    showCurp();
                 }else{
                    AlertDialog myalert=generarAlerta("Error","Formulario incorrecto, intenta de nuevo.",R.drawable.warningicon);
                     myalert.show();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                          R.drawable.info_icon);
                  myalert.show();
                  break;
-             case R.id.fav:
+             case R.id.back:
                  if((int)fav.getTag()==R.drawable.fav){
                      fav.setImageResource(R.drawable.fav_active);
                      fav.setTag(R.drawable.fav_active);
@@ -195,6 +195,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eApeMat.setBackgroundResource(R.drawable.disenobot);
         eApePat.setBackgroundResource(R.drawable.disenobot);
         eNom.setBackgroundResource(R.drawable.disenobot);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void showCurp() {
+        Intent newpantalla = new Intent(this,mostrar_curp.class); //Creo el objeto intent para poder ir a otra pantalla
+        newpantalla.putExtra(CURP,scurp);
+        startActivity(newpantalla);
     }
 
     public AlertDialog generarAlerta(String title, String msg, int icon){
@@ -306,8 +313,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Log.i("curp",""+curp.toUpperCase());
         curp = curp.toUpperCase();
-        AlertDialog myalert = generarAlerta("Curp",curp,R.drawable.warningicon);
-        myalert.show();
+        scurp=curp;
+        /*AlertDialog myalert = generarAlerta("Curp",curp,R.drawable.warningicon);
+        myalert.show();*/
+
+
+
+
     }
 
     public Character consonanteInt(String a){
